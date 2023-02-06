@@ -1,38 +1,29 @@
 import os
-import getpass
 
-
-try:
-    import psycopg2
-except ImportError:
-    from psycopg2cffi import compat
-    compat.register()
 
 DEBUG = False
 INSTALLED_APPS = [
         'django.contrib.contenttypes',
         'django.contrib.auth',
         'django_extensions',
-        'app',
+        'db_app',
     ]
 
-try:
-    from psycopg2cffi import compat
-    compat.register()
-except ImportError:
-    pass
-
 TIME_ZONE = ''
-DB_USER = os.environ.get('DB_USER', getpass.getuser())
-SECRET_KEY = 'not so secret'
+DB_USER = os.environ.get('DB_USER', 'postgres')
+DB_HOST = os.environ.get('DB_HOST', 'localhost')
+DB_PASSWORD = os.environ.get('DB_PASSWORD', 'postgres')
+DB_NAME = os.environ.get('DB_NAME', 'postgres')
+DB_PORT = os.environ.get('DB_PORT', '')
 
+SECRET_KEY = 'not so secret'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'psycopg2_cffi_test_db',
+        'NAME': DB_NAME,
         'USER': DB_USER,
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
         },
     }

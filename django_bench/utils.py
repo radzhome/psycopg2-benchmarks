@@ -6,11 +6,11 @@ import traceback
 
 
 def measure_time(*deco_args, **deco_kwargs):
-    ''' Print function execution time, and return it.
+    """ Print function execution time, and return it.
     Supports additional profiling:
     profile = True  - using profilehooks (uses cProfile),
     stat_profile = True - using statprof
-    '''
+    """
     def deco(fn):
         @wraps(fn)
         def inner(*args, **kwargs):
@@ -39,10 +39,10 @@ def measure_time(*deco_args, **deco_kwargs):
     else:
         return deco
 
+
 def bulk_ids(model, n):
     from django.db import connection
     cursor = connection.cursor()
-    sql = "select nextval('%s_id_seq') from generate_series(1,%d)" % \
-            (model._meta.db_table, n)
+    sql = "select nextval('%s_id_seq') from generate_series(1,%d)" % (model._meta.db_table, n)
     cursor.execute(sql)
     return [int(r[0]) for r in cursor]
