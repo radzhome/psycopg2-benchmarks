@@ -38,11 +38,8 @@ docker run -it --platform linux/amd64 --network=host python:3.11-slim sh
 
 Script to install on slim and build essentials for psycopg2 compile
 ```
-apt-get update && apt-get install -y wget unzip
-apt-get install -y build-essential python3-dev libpq-dev
-wget https://github.com/radzhome/psycopg2-benchmarks/archive/refs/heads/master.zip
-unzip master.zip
-cd psycopg2-benchmarks-master/django_bench
+apt-get update && apt-get install -y wget unzip && apt-get install -y build-essential python3-dev libpq-dev
+wget https://github.com/radzhome/psycopg2-benchmarks/archive/refs/heads/master.zip && unzip master.zip && cd psycopg2-benchmarks-master/django_bench
 pip install -r requirements.txt
 export DB_HOST=localhost & ./bench 1000
 ```
